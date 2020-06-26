@@ -1,0 +1,3 @@
+extend type Query @auth(middleware: ["auth:api"]) {
+    Timeline(id: Int!) : [Timeline] @field(resolver: "TimelineResolver@resolve")
+}
