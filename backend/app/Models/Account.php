@@ -13,6 +13,7 @@ class Account extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'twitter_id',
+        'email',
         'password',
         'logged_in_at',
         'signed_up_at'
