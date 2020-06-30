@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    import {CREATE_ACCOUNT} from "../graphql/mutation";
-
+    import {CREATE_ACCOUNT} from "../graphql/mutation.js";
+    import store from '../store/index.js';
     export default {
         data() {
             return {
@@ -61,6 +61,9 @@
                     },
                 }).then((data) => {
                     console.log(data);
+                    const token = localStorage.getItem("vue_token", data.data.CreateAccount.token.access_token);
+                    store.commit("logined");
+                    this.$router.push("/");
                 }).catch((error) => {
                     console.error(error);
                 })

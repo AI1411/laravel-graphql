@@ -26,3 +26,16 @@ export const CREATE_ACCOUNT = gql`
         }
     }
 `;
+
+export const LOGIN = gql`
+mutation($email: String! $password: String!) {
+    Login(
+        email: $email
+        password: $password
+    ) {
+        access_token
+        expires_in
+    }
+}
+
+`
