@@ -21,7 +21,23 @@ class CreateTweetResolver
 
         $this->addTweetToTimeline($account, $tweet);
 
+        $this->addTweetToFollowersTimeline($account, $tweet);
+
         return $tweet;
+    }
+
+    /**
+     * @param Account $account
+     * @param Tweet $tweet
+     */
+    protected function addTweetToFollowersTimeline(Account $account, Tweet $tweet)
+    {
+        foreach ($account->followers as $follower) {
+            Timeline::create([
+                'account_id' => $follower->follower_account_id,
+                'tweet_id' => $tweet->id,
+            ]);
+        }
     }
 
     /**
@@ -33,7 +49,7 @@ class CreateTweetResolver
     {
         return Tweet::create([
             'account_id' => $account->id,
-            'content'    => $data['content'],
+            'content' => $data['content'],
             'tweeted_at' => Carbon::now(),
         ]);
 
@@ -48,7 +64,7 @@ class CreateTweetResolver
     {
         return Timeline::create([
             'account_id' => $account->id,
-            'tweet_id'   => $tweet->id,
+            'tweet_id' => $tweet->id,
         ]);
     }
 }
