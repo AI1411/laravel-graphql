@@ -28,14 +28,22 @@ export const CREATE_ACCOUNT = gql`
 `;
 
 export const LOGIN = gql`
-mutation($email: String! $password: String!) {
-    Login(
-        email: $email
-        password: $password
-    ) {
-        access_token
-        expires_in
-    }
-}
+    mutation($email: String! $password: String!) {
+        Login(
+            email: $email
+            password: $password
+        ) {
+            access_token
+            expires_in
+        }
+    }`
 
+export const CREATE_TWEET = gql`
+    mutation ($tweet: String!) {
+        CreateTweet(content: $tweet) {
+            id
+            content
+            tweeted_at
+        }
+    }
 `
